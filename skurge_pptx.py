@@ -1,4 +1,3 @@
-from operator import index
 from pptx import Presentation
 from pptx.util import Inches
 from pptx.util import Pt
