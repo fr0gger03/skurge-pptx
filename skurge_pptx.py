@@ -9,8 +9,8 @@ from pptx.util import Pt
 
 slack_payload={
     "body": {
-        "customer": "Carnival Cruise Line",
-        "setSA": "Laurel Spadaro",
+        "customer": "Awesome Customer",
+        "setSA": "First_name Last_Name",
         "useCases": [
             "Cloud Migrations - Data Center Wide",
             "Cloud Migrations - Infrastructure Refresh",
