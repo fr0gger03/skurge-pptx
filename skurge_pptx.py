@@ -153,6 +153,10 @@ cell_solutions.text = "\n".join(services)
 ###########
 # slide_success = prs.slides.add_slide(slide_layout_content)
 slide_success = prs.slides.add_slide(slide_layout_titlesub)
+shape_title = slide_success.placeholders[0]
+shape_title.text = "Success Criteria Overview"
+shape_subtitle = slide_success.placeholders[10]
+shape_subtitle.text = "Overview"
 x, y, cx, cy = Inches(0.67), Inches(1.25), Inches(12), Inches(5)
 shape_content = slide_success.shapes.add_table(success_count+1, 3, x, y, cx, cy)
 table = shape_content.table
@@ -190,6 +194,34 @@ for cell in iter_cells(table):
     for paragraph in cell.text_frame.paragraphs:
         for run in paragraph.runs:
             run.font.size = Pt(10)
+
+# add one slide per test
+for case in slack_payload["items"]:
+    slide_test = prs.slides.add_slide(slide_layout_titlesub)
+    x, y, cx, cy = Inches(0.67), Inches(1.25), Inches(12), Inches(5)
+    shape_content = slide_test.shapes.add_table(3, 3, x, y, cx, cy)
+    table = shape_content.table
+    cell_hdr1 = table.cell(0, 0)
+    cell_hdr2 = table.cell(0, 1)
+    cell_hdr3 = table.cell(0, 2)
+    cell_hdr1.text = "Test"
+    cell_hdr2.text = "Expected results"
+    cell_hdr3.text = "Requirement mapping"
+    case_test = case.get("Test Case ")
+    cell_test =  table.cell(1, 0)
+    cell_test.text = case_test
+    case_results = case.get("Results ")
+    cell_results =  table.cell(1, 1)
+    cell_results.text = case_results
+    case_reqs = case.get("Requirement Mapping")
+    cell_reqs =  table.cell(1, 2)
+    cell_reqs.text = case_reqs
+    shape_title = slide_test.placeholders[0]
+    shape_title.text = "Success Criteria Detail"
+    shape_subtitle = slide_test.placeholders[10]
+    shape_subtitle.text = case_test
+
+
 
 ###########
 # Save presentation
