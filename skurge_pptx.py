@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from pptx import Presentation
 from pptx.util import Inches
 from pptx.util import Pt
@@ -6,92 +8,62 @@ from pptx.util import Pt
 # ingest payload
 ###########
 
-slack_payload={
-    "body": {
-        "customer": "Awesome Customer",
-        "setSA": "First_name Last_Name",
-        "useCases": [
-            "Cloud Migrations - Data Center Wide",
-            "Cloud Migrations - Infrastructure Refresh",
-            "Disaster Recovery - New DR"
-        ],
-        "tvType": "POC",
-        "services": [
-            "VMware Cloud Disaster Recovery",
-            "vRealize Operations Manager"
-        ],
-        "estDate": "2021-11-04"
+vPayloadArray={
+  "Customer": "Piedmont Health",
+  "SA": "Tom Twyman",
+   "solution": "VMware Cloud on AWS",
+  "tvType": "POC",
+  "services": [
+    "Hybrid Cloud Extension"
+  ],
+  "estDate": "2022-10-03",
+  "useCases": [
+    "Data Center Extension - Footprint Expansion"
+  ],
+  "Tests": [
+    {
+      "RptTestCaseID": "6001",
+      "RptTestService": "VMware Cloud on AWS",
+      "RptTestCase": "Provision cloud SDDC",
+      "RptResults": "Successful instantiation / creation of VMware Cloud on AWS Software Defined Datacenter (SDDC);  if using VCDR, provisioned through VCDR interface\n",
+      "RptRequirements": "Vmware Account activated\nAWS Account activated\nAWS VPC created with necessary CIDR and subnets\nSDDC created and connected to AWS VPC"
     },
-    "items": [
-        {
-            "TestID": "2001",
-            "Test Case ": "Connect protected site to Vmware Cloud DR Service",
-            "Solutions/add ons": "VCDR",
-            "Task Ownership": "VMware & CUSTOMER",
-            "Results ": "Protected site appears in VCDR service as \"Protected Site\"",
-            "Requirement Mapping": "DRaaS Connector successfully deployed and connected to VMware Cloud DR\nProtected Site vCenter registered with VCDR SaaS orchestrator"
-        },
-        {
-            "TestID": "2002",
-            "Test Case ": "Provision cloud SDDC",
-            "Solutions/add ons": "VMware Cloud",
-            "Task Ownership": "VMware & CUSTOMER",
-            "Results ": "Successful instantiation / creation of VMware Cloud on AWS Software Defined Datacenter (SDDC);  if using VCDR, provisioned through VCDR interface\n",
-            "Requirement Mapping": "Vmware Account activated\nAWS Account activated\nAWS VPC created with necessary CIDR and subnets\nSDDC created and connected to AWS VPC"
-        },
-        {
-            "TestID": "2003",
-            "Test Case ": "Basic connectivity",
-            "Solutions/add ons": "VMware Cloud",
-            "Task Ownership": "VMware & CUSTOMER",
-            "Results ": "Communications between VMC/On-Prem – Direct Connect or IPSec VPN",
-            "Requirement Mapping": "L3 VPN successfully established – OR - Direct Connect successfully established\nOpen / interact with vCenter in VMC \nCold migration of VM is successful"
-        },
-        {
-            "TestID": "2008",
-            "Test Case ": "Protect VMs for test using VMware Cloud DR solution",
-            "Solutions/add ons": "Site Recovery, VCDR",
-            "Task Ownership": "VMware & CUSTOMER",
-            "Results ": "Virtual machines replicated to Scale-out filesystem",
-            "Requirement Mapping": "VMs successfully backed up to VMware Cloud DR\nProtection Groups created\nInput VM list required"
-        },
-        {
-            "TestID": "2009",
-            "Test Case ": "Successful DR test",
-            "Solutions/add ons": "Site Recovery, VCDR",
-            "Task Ownership": "VMware & CUSTOMER",
-            "Results ": "Validated virtual machine(s) running successfully in isolated network bubble in DR location",
-            "Requirement Mapping": "Configuration of 1-3 recovery plans\nConfiguration of test network for DR\nSuccessful execution of DR test"
-        },
-        {
-            "TestID": "2010",
-            "Test Case ": "Successful DR execution",
-            "Solutions/add ons": "Site Recovery, VCDR",
-            "Task Ownership": "VMware & CUSTOMER",
-            "Results ": "Successful failover of 1-10 virtual machines to VMC on AWS",
-            "Requirement Mapping": "Configuration of 1-3 recovery plans\nSuccessful execution of DR failover\nSuccessful execution of DR fail back"
-        },
-        {
-            "TestID": "2011",
-            "Test Case ": "VMware SDDC Operations from VMware Cloud DR Orchestrator",
-            "Solutions/add ons": "VCDR",
-            "Task Ownership": "VMware & CUSTOMER",
-            "Results ": "VCDR SaaS Orchestrator able to operate / scale SDDC as necessary",
-            "Requirement Mapping": "Expand SDDC \nContract SDDC\nAdd network to SDDC\nCreate Firewall Rule\nDeploy VM into SDDC\nCreate resource pools / folders "
-        }
-    ]
+    {
+      "RptTestCaseID": "6002",
+      "RptTestService": "VMware Cloud on AWS",
+      "RptTestCase": "Basic connectivity",
+      "RptResults": "Communications between VMC/On-Prem – Direct Connect or IPSec VPN",
+      "RptRequirements": "L3 VPN successfully established – OR - Direct Connect successfully established\nOpen / interact with vCenter in VMC \nCold migration of VM is successful"
+    },
+    {
+      "RptTestCaseID": "8001",
+      "RptTestService": "VMware Cloud Hybrid Linked Mode",
+      "RptTestCase": "unified inventory view across vCenters",
+      "RptResults": "Single unified view of local and cloud SDDC vCenter",
+      "RptRequirements": "Configure hybrid linked mode using Cloud Gateway appliance or directly via SDDC"
+    },
+    {
+      "RptTestCaseID": "8002",
+      "RptTestService": "VMware Cloud Hybrid Linked Mode",
+      "RptTestCase": "integration with vSphere SSO (single sign-on)",
+      "RptResults": "Ability to log into SDDC using directory credentials",
+      "RptRequirements": "Configure hybrid linked mode using Cloud Gateway appliance or directly via SDDC"
+    }
+  ]
 }
+
 
 ###########
 # instantiate variables for data ingest
 ###########
-customer = slack_payload["body"]["customer"]
-setSA = slack_payload["body"]["setSA"]
-tvType = slack_payload["body"]["tvType"]
-estDate = slack_payload["body"]["estDate"]
-services = slack_payload["body"]["services"]
-use_cases = slack_payload["body"]["useCases"]
-success_count = len(slack_payload["items"])
+customer = vPayloadArray["Customer"]
+setSA = vPayloadArray["SA"]
+tvType = vPayloadArray["tvType"]
+estDate = vPayloadArray["estDate"]
+solution = vPayloadArray["solution"]
+services = vPayloadArray["services"]
+use_cases = vPayloadArray["useCases"]
+success_count = len(vPayloadArray["Tests"][0])
 
 ###########
 # open sample presentation
@@ -139,14 +111,16 @@ cell_estdate = table.cell(1, 1)
 cell_tvtype = table.cell(2, 1)
 cell_sa = table.cell(3, 1)
 cell_uses = table.cell(4, 1)
-cell_solutions = table.cell(5, 1)
+cell_solution = table.cell(5, 1)
+cell_services = table.cell(6, 1)
 
 cell_cust.text = customer
 cell_estdate.text = setSA
 cell_tvtype.text = tvType
 cell_sa.text = estDate
 cell_uses.text = "\n".join(use_cases)
-cell_solutions.text = "\n".join(services)
+cell_solution.text = solution
+cell_services.text = "\n".join(services)
 
 ###########
 # update success criteria slide
@@ -158,29 +132,40 @@ shape_title.text = "Success Criteria Overview"
 shape_subtitle = slide_success.placeholders[10]
 shape_subtitle.text = "Overview"
 x, y, cx, cy = Inches(0.67), Inches(1.25), Inches(12), Inches(5)
-shape_content = slide_success.shapes.add_table(success_count+1, 3, x, y, cx, cy)
+shape_content = slide_success.shapes.add_table(success_count+1, 5, x, y, cx, cy)
 table = shape_content.table
 
 # populate table
 cell_hdr1 = table.cell(0, 0)
 cell_hdr2 = table.cell(0, 1)
 cell_hdr3 = table.cell(0, 2)
-cell_hdr1.text = "Test"
-cell_hdr2.text = "Expected results"
-cell_hdr3.text = "Requirement mapping"
+cell_hdr4 = table.cell(0, 3)
+cell_hdr5 = table.cell(0, 4)
+
+cell_hdr1.text = "Test ID"
+cell_hdr2.text = "Solution"
+cell_hdr3.text = "Test"
+cell_hdr4.text = "Expected results"
+cell_hdr5.text = "Requirement mapping"
 
 # iterate through success criteria, populate table
 # reset case_counter
 row_counter = 1
-for case in slack_payload["items"]:
-    case_test = case.get("Test Case ")
-    cell_test =  table.cell(row_counter, 0)
+for case in vPayloadArray["Tests"]:
+    case_testid = case.get("RptTestCaseID")
+    cell_testid =  table.cell(row_counter, 0)
+    cell_testid.text = case_testid
+    case_test_solution = case.get("RptTestService")
+    cell_test =  table.cell(row_counter, 1)
+    cell_test.text = case_test_solution
+    case_test = case.get("RptTestCase")
+    cell_test =  table.cell(row_counter, 2)
     cell_test.text = case_test
-    case_results = case.get("Results ")
-    cell_results =  table.cell(row_counter, 1)
+    case_results = case.get("RptResults")
+    cell_results =  table.cell(row_counter, 3)
     cell_results.text = case_results
-    case_reqs = case.get("Requirement Mapping")
-    cell_reqs =  table.cell(row_counter, 2)
+    case_reqs = case.get("RptRequirements")
+    cell_reqs =  table.cell(row_counter, 4)
     cell_reqs.text = case_reqs
     row_counter += 1
 
@@ -196,32 +181,52 @@ for cell in iter_cells(table):
             run.font.size = Pt(10)
 
 # add one slide per test
-for case in slack_payload["items"]:
+for case in vPayloadArray["Tests"]:
     slide_test = prs.slides.add_slide(slide_layout_titlesub)
     x, y, cx, cy = Inches(0.67), Inches(1.25), Inches(12), Inches(5)
-    shape_content = slide_test.shapes.add_table(3, 3, x, y, cx, cy)
+    shape_content = slide_test.shapes.add_table(3, 5, x, y, cx, cy)
     table = shape_content.table
+
     cell_hdr1 = table.cell(0, 0)
     cell_hdr2 = table.cell(0, 1)
     cell_hdr3 = table.cell(0, 2)
-    cell_hdr1.text = "Test"
-    cell_hdr2.text = "Expected results"
-    cell_hdr3.text = "Requirement mapping"
-    case_test = case.get("Test Case ")
-    cell_test =  table.cell(1, 0)
+    cell_hdr4 = table.cell(0, 3)
+    cell_hdr5 = table.cell(0, 4)
+
+    cell_hdr1.text = "Test ID"
+    cell_hdr2.text = "Solution"
+    cell_hdr3.text = "Test"
+    cell_hdr4.text = "Expected results"
+    cell_hdr5.text = "Requirement mapping"
+
+    case_testid = case.get("RptTestCaseID")
+    cell_testid =  table.cell(1, 0)
+    cell_testid.text = case_testid
+    case_test_solution = case.get("RptTestService")
+    cell_test =  table.cell(1, 1)
+    cell_test.text = case_test_solution
+    case_test = case.get("RptTestCase")
+    cell_test =  table.cell(1, 2)
     cell_test.text = case_test
-    case_results = case.get("Results ")
-    cell_results =  table.cell(1, 1)
+    case_results = case.get("RptResults")
+    cell_results =  table.cell(1, 3)
     cell_results.text = case_results
-    case_reqs = case.get("Requirement Mapping")
-    cell_reqs =  table.cell(1, 2)
+    case_reqs = case.get("RptRequirements")
+    cell_reqs =  table.cell(1, 4)
     cell_reqs.text = case_reqs
     shape_title = slide_test.placeholders[0]
     shape_title.text = "Success Criteria Detail"
     shape_subtitle = slide_test.placeholders[10]
     shape_subtitle.text = case_test
-
-
+    # force font size to 14
+    def iter_cells(table):
+        for row in table.rows:
+            for cell in row.cells:
+                yield cell
+    for cell in iter_cells(table):
+        for paragraph in cell.text_frame.paragraphs:
+            for run in paragraph.runs:
+                run.font.size = Pt(14)
 
 ###########
 # Save presentation
