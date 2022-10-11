@@ -9,7 +9,7 @@ from pptx.util import Pt
 ###########
 
 vPayloadArray={
-  "Customer": "Piedmont Health",
+  "Customer": "Awesome Customer",
   "SA": "Tom Twyman",
    "solution": "VMware Cloud on AWS",
   "tvType": "POC",
