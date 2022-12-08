@@ -11,8 +11,8 @@ from pptx.util import Pt
 ###########
 
 vPayloadArray={
-  "Customer": "Truper S.A. de C.V",
-  "SA": "Laura Garro",
+  "Customer": "Acme Industries",
+  "SA": "SAFirstname SALastname",
   "solution": "VMware Cloud on AWS",
   "tvType": "VMW/AWS funded Pilot",
   "services": [
