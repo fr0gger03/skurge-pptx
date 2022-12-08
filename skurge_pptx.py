@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import collections 
+import collections.abc
 from pptx import Presentation
 from pptx.util import Inches
 from pptx.util import Pt
@@ -9,16 +11,18 @@ from pptx.util import Pt
 ###########
 
 vPayloadArray={
-  "Customer": "Awesome Customer",
-  "SA": "Tom Twyman",
-   "solution": "VMware Cloud on AWS",
-  "tvType": "POC",
+  "Customer": "Truper S.A. de C.V",
+  "SA": "Laura Garro",
+  "solution": "VMware Cloud on AWS",
+  "tvType": "VMW/AWS funded Pilot",
   "services": [
-    "Hybrid Cloud Extension"
+    "NA"
   ],
-  "estDate": "2022-10-03",
+  "estDate": "2022-01-10",
   "useCases": [
-    "Data Center Extension - Footprint Expansion"
+    "Data Center Extension - Test/Dev",
+    "Data Center Extension - Footprint Expansion",
+    "Data Center Extension - On-demand Capacity"
   ],
   "Tests": [
     {
@@ -36,18 +40,11 @@ vPayloadArray={
       "RptRequirements": "L3 VPN successfully established – OR - Direct Connect successfully established\nOpen / interact with vCenter in VMC \nCold migration of VM is successful"
     },
     {
-      "RptTestCaseID": "8001",
-      "RptTestService": "VMware Cloud Hybrid Linked Mode",
-      "RptTestCase": "unified inventory view across vCenters",
-      "RptResults": "Single unified view of local and cloud SDDC vCenter",
-      "RptRequirements": "Configure hybrid linked mode using Cloud Gateway appliance or directly via SDDC"
-    },
-    {
-      "RptTestCaseID": "8002",
-      "RptTestService": "VMware Cloud Hybrid Linked Mode",
-      "RptTestCase": "integration with vSphere SSO (single sign-on)",
-      "RptResults": "Ability to log into SDDC using directory credentials",
-      "RptRequirements": "Configure hybrid linked mode using Cloud Gateway appliance or directly via SDDC"
+      "RptTestCaseID": "6004",
+      "RptTestService": "VMware Cloud on AWS",
+      "RptTestCase": "Application Load testing - performance benchmark",
+      "RptResults": "Compare performance of CUSTOMER application on-prem to in VMC on AWS",
+      "RptRequirements": "Move / migrate CUSTOMER application to VMC on AWS\nGenerate load Compare results"
     }
   ]
 }
